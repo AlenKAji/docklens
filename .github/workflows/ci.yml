@@ -30,7 +30,9 @@ jobs:
       - name: Lint
         run: ruff check .
       - name: Test
-        run: pytest -q
+        env:
+          PYTHONPATH: .
+        run: python -m pytest -q
 
   image:
     runs-on: ubuntu-latest
