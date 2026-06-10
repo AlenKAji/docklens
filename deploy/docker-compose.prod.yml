@@ -1,0 +1,31 @@
+services:
+  docklens:
+    image: ${IMAGE:-ghcr.io/your-org/docklens:latest}
+    container_name: docklens
+    ports:
+      - "${PORT:-8080}:8080"
+    environment:
+      APP_NAME: DockLens
+      APP_ENV: production
+      DEMO_MODE: "false"
+      DOCKER_HOST: unix:///var/run/docker.sock
+      IMAGE_STALE_DAYS: "${IMAGE_STALE_DAYS:-90}"
+      REQUIRE_OWNER_LABEL: "${REQUIRE_OWNER_LABEL:-true}"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    group_add:
+      - "${DOCKER_GID:-0}"
+    read_only: true
+    tmpfs:
+      - /tmp:noexec,nosuid,size=64m
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/healthz', timeout=3).read()"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped

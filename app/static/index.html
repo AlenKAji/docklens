@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DockLens</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header class="shell header">
+      <div>
+        <p class="eyebrow">Docker Fleet Health</p>
+        <h1>DockLens</h1>
+      </div>
+      <div class="header-actions">
+        <span id="sourceBadge" class="badge">loading</span>
+        <button id="refreshButton" type="button">Refresh</button>
+      </div>
+    </header>
+
+    <main class="shell">
+      <section class="summary-grid" aria-label="Fleet summary">
+        <article class="stat">
+          <span>Total</span>
+          <strong id="totalContainers">-</strong>
+        </article>
+        <article class="stat">
+          <span>Running</span>
+          <strong id="runningContainers">-</strong>
+        </article>
+        <article class="stat warn">
+          <span>Unhealthy</span>
+          <strong id="unhealthyContainers">-</strong>
+        </article>
+        <article class="stat danger">
+          <span>High Risk</span>
+          <strong id="highRiskContainers">-</strong>
+        </article>
+      </section>
+
+      <section class="toolbar" aria-label="Filters">
+        <label>
+          Risk
+          <select id="riskFilter">
+            <option value="all">All</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
+        </label>
+        <label>
+          Search
+          <input id="searchInput" type="search" placeholder="container, image, owner" />
+        </label>
+      </section>
+
+      <section class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Container</th>
+              <th>Image</th>
+              <th>Status</th>
+              <th>Owner</th>
+              <th>Risk</th>
+              <th>Reason</th>
+            </tr>
+          </thead>
+          <tbody id="containerRows"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>

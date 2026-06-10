@@ -1,0 +1,10 @@
+docklens.example.com {
+  encode gzip zstd
+
+  basicauth {
+    # Generate with: caddy hash-password --plaintext 'change-me'
+    admin JDJhJDE0JGp5NmU4T2lSblNtdVJsS3F0VnFKZXVmMGhBM0w2UnRQVW9YcGdWVEV2WUFwaUQyNmRuYUZP
+  }
+
+  reverse_proxy docklens:8080
+}

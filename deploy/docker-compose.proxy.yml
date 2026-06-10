@@ -1,0 +1,25 @@
+services:
+  docklens:
+    extends:
+      file: docker-compose.prod.yml
+      service: docklens
+    expose:
+      - "8080"
+    ports: []
+
+  caddy:
+    image: caddy:2.9.1
+    depends_on:
+      - docklens
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./reverse-proxy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    restart: unless-stopped
+
+volumes:
+  caddy-data:
+  caddy-config:
