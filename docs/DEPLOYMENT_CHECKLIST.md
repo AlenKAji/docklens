@@ -6,6 +6,9 @@ Use this checklist before publishing DockLens as a portfolio project or deployin
 
 - [ ] Create GitHub repository.
 - [ ] Push the code to `main`.
+- [ ] If using Windows and tools are not on PATH, call `C:\Program Files\Git\cmd\git.exe` and `C:\Program Files\GitHub CLI\gh.exe` directly.
+- [ ] Authenticate GitHub CLI with `gh auth login --hostname github.com --git-protocol https --web`.
+- [ ] Or run `.\deploy\publish-github.ps1 -RepoName docklens` after authentication.
 - [ ] Confirm GitHub Actions test job passes.
 - [ ] Confirm Docker image job publishes to GHCR.
 - [ ] Add screenshots to `docs/images/`.
