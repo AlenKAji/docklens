@@ -47,17 +47,6 @@ export DOCKER_GID=$(getent group docker | cut -d: -f3)
 docker compose up --build
 ```
 
-Open:
-
-- Dashboard: http://localhost:8080
-- API summary: http://localhost:8080/api/summary
-- Prometheus metrics: http://localhost:8080/metrics
-
-If port `8080` is already occupied:
-
-```bash
-PORT=8081 docker compose up --build
-```
 
 PowerShell:
 
@@ -78,7 +67,6 @@ Run the observability profile:
 docker compose --profile observability up --build
 ```
 
-Prometheus will be available at http://localhost:9090 and Grafana at http://localhost:3000.
 
 ## Local Development
 
@@ -186,12 +174,3 @@ observability/     Prometheus configuration
 tests/             Unit tests
 .github/workflows/ CI/CD pipeline
 ```
-
-## Interview Talking Points
-
-- Why the Docker socket is useful and risky.
-- How health checks and readiness differ.
-- How CI builds, scans, and publishes immutable images.
-- How Compose profiles keep observability optional.
-- How labels enable operational ownership and runbook discovery.
-- How reverse-proxy authentication reduces risk when the Docker socket is mounted.
